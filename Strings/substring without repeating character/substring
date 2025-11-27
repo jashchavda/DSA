@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class LongestSubstring {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Accept input string
+        String input = sc.nextLine();
+        
+        // Function call
+        int result = lengthOfLongestSubstring(input);
+        
+        System.out.println("Length of Longest Substring Without Repeating Characters: " + result);
+    }
+    
+    public static int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int left = 0, right = 0, maxLen = 0;
+        
+        while (right < s.length()) {
+            if (!set.contains(s.charAt(right))) {
+                set.add(s.charAt(right));
+                maxLen = Math.max(maxLen, right - left + 1);
+                right++;
+            } else {
+                set.remove(s.charAt(left));
+                left++;
+            }
+        }
+        
+        return maxLen;
+    }
+}
